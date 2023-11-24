@@ -8,11 +8,11 @@ import { Label } from "../ui/label";
 type EditSiteModalProps = {
     isCelsius: boolean;
     setIsCelsius: React.Dispatch<SetStateAction<boolean>>;
+    darkMode: boolean;
+    setDarkMode: React.Dispatch<SetStateAction<boolean>>;
 };
 
-export const EditSiteModal = ({ isCelsius, setIsCelsius }: EditSiteModalProps) => {
-    const [darkMode, setDarkMode] = useState<boolean>(false);
-
+export const EditSiteModal = ({ isCelsius, setIsCelsius, darkMode, setDarkMode }: EditSiteModalProps) => {
     useEffect(() => {
         const isDarkMode = localStorage.getItem("darkMode") === "true";
         setDarkMode(isDarkMode);

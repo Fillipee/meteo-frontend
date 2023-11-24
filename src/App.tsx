@@ -12,6 +12,7 @@ function App() {
     const [weather, setWeather] = useState<Weather[]>([]);
     const [chartType, setChartType] = useState<ChartType>("temperature");
     const [isConnected, setIsConnected] = useState(socket.connected);
+    const [darkMode, setDarkMode] = useState<boolean>(false);
     const [isCelcius, setIsCelsius] = useState(
         localStorage.getItem("isCelsius") ? localStorage.getItem("isCelsius") === "true" : true
     );
@@ -45,8 +46,14 @@ function App() {
 
     return (
         <div className="bg-primaryBlue-50 dark:bg-primaryBlue-900 min-h-screen h-full p-4">
-            <Layout station={station} setStation={setStation}>
-                <Banner weather={weather} isCelsius={isCelcius} setIsCelsius={setIsCelsius} />
+            <Layout station={station} setStation={setStation} darkMode={darkMode}>
+                <Banner
+                    weather={weather}
+                    isCelsius={isCelcius}
+                    setIsCelsius={setIsCelsius}
+                    darkMode={darkMode}
+                    setDarkMode={setDarkMode}
+                />
                 <Widgets weather={weather} chartType={chartType} setChartType={setChartType} />
                 <Chart weather={weather} chartType={chartType} period={period} setPeriod={setPeriod} />
             </Layout>

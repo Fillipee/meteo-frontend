@@ -7,13 +7,15 @@ type BannerProps = {
     weather: Weather[] | null;
     isCelsius: boolean;
     setIsCelsius: React.Dispatch<SetStateAction<boolean>>;
+    darkMode: boolean;
+    setDarkMode: React.Dispatch<SetStateAction<boolean>>;
 };
 
 const isWinter = (day: number, month: number) => {
     return (month === 11 && day > 15) || month === 12 || month === 1 || month === 2;
 };
 
-export const Banner = ({ weather, isCelsius, setIsCelsius }: BannerProps) => {
+export const Banner = ({ weather, isCelsius, setIsCelsius, darkMode, setDarkMode }: BannerProps) => {
     const getImage = () => {
         const now = new Date();
         const day = parseInt(format(now, "d", { useAdditionalDayOfYearTokens: true }));
@@ -63,7 +65,12 @@ export const Banner = ({ weather, isCelsius, setIsCelsius }: BannerProps) => {
                     {isCelsius ? "°C" : "°F"}
                 </p>
             </div>
-            <EditSiteModal isCelsius={isCelsius} setIsCelsius={setIsCelsius} />
+            <EditSiteModal
+                isCelsius={isCelsius}
+                setIsCelsius={setIsCelsius}
+                darkMode={darkMode}
+                setDarkMode={setDarkMode}
+            />
         </section>
     );
 };

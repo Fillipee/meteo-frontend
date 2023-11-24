@@ -7,13 +7,14 @@ import { cs } from "date-fns/locale";
 type NavbarProps = {
     station: string;
     setStation: React.Dispatch<React.SetStateAction<string>>;
+    darkMode: boolean;
 };
 
-export const Navbar = ({ station, setStation }: NavbarProps) => {
+export const Navbar = ({ station, setStation, darkMode }: NavbarProps) => {
     return (
         <header className="flex gap-x-2 justify-between items-center">
             <div className="flex sm:gap-x-6 items-center">
-                {localStorage.getItem("darkMode") === "true" ? (
+                {darkMode ? (
                     <>
                         <img src={whiteLogo} alt="LOGO" className="h-10 sm:h-12" />
                     </>
