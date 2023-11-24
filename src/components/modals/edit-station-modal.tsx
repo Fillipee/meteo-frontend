@@ -1,4 +1,4 @@
-import { Settings } from "lucide-react";
+import { Edit } from "lucide-react";
 import {
     Dialog,
     DialogContent,
@@ -8,11 +8,15 @@ import {
     DialogTrigger,
 } from "../ui/dialog";
 
-export const EditStationModal = () => {
+type EditStationModal = {
+    darkMode: boolean;
+};
+
+export const EditStationModal = ({ darkMode }: EditStationModal) => {
     return (
         <Dialog>
             <DialogTrigger className="h-fit">
-                <Settings className="mt-4 h-6 w-6 cursor-pointer hover:animate-rotate-little" color="#fff" />
+                <Edit className="h-6 w-6 cursor-pointer" color={darkMode ? "#fff" : "#000"} />
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

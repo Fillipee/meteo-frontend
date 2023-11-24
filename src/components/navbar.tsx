@@ -4,6 +4,7 @@ import whiteLogo from "../assets/images/white_logo.png";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { cs } from "date-fns/locale";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import { EditStationModal } from "./modals/edit-station-modal";
 
 type NavbarProps = {
     station: string;
@@ -34,6 +35,7 @@ export const Navbar = ({ station, setStation, darkMode }: NavbarProps) => {
                         <SelectItem value="2">Stanice 2</SelectItem>
                     </SelectContent>
                 </Select>
+                <EditStationModal darkMode={darkMode}/>
             </div>
             <TooltipProvider>
                 <Tooltip delayDuration={100}>
@@ -43,9 +45,7 @@ export const Navbar = ({ station, setStation, darkMode }: NavbarProps) => {
                             locale: cs,
                         })}
                     </TooltipTrigger>
-                    <TooltipContent>
-                        {format(new Date(), "PPP")}{" "}
-                    </TooltipContent>
+                    <TooltipContent>{format(new Date(), "PPP")} </TooltipContent>
                 </Tooltip>
             </TooltipProvider>
         </header>
