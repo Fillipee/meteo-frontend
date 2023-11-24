@@ -1,12 +1,37 @@
-import { Weather } from "@/types/types";
+import { ChartType, Weather } from "@/types/types";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 
 type ChartProps = {
     weather: Weather[] | null;
+    chartType: ChartType;
 };
 
-export const Chart = ({ weather }: ChartProps) => {
+const getXAxis = (weather: Weather[] | null, chartType: ChartType) => {
+    switch (chartType) {
+        case "temperature":
+            return weather?.map((value: Weather) =>
+                format(value?.time ? new Date(value?.time) : new Date(), "PPpp")
+            );
+        default:
+            return [];
+    }
+};
+
+const getYxis = (weather: Weather[] | null, chartType: ChartType) => {
+    switch (chartType) {
+        case "temperature":
+            return weather?.map((value: Weather) => value?.temperature);
+        case "moisture":
+            return weather?.map((value: Weather) => value?.humidity);
+        case "pressure":
+            return weather?.map((value: Weather) => value?.pressury);
+        default:
+            return [];
+    }
+};
+
+export const Chart = ({ weather, chartType }: ChartProps) => {
     const option = {
         tooltip: {
             trigger: "axis",
@@ -14,9 +39,7 @@ export const Chart = ({ weather }: ChartProps) => {
         xAxis: {
             type: "category",
             boundaryGap: false,
-            data: weather?.map((value: Weather) =>
-                format(value?.time ? new Date(value?.time) : new Date(), "PPpp")
-            ),
+            data: getXAxis(weather, chartType),
         },
         yAxis: {
             type: "value",
@@ -29,7 +52,7 @@ export const Chart = ({ weather }: ChartProps) => {
                 name: "Temperature",
                 type: "line",
                 stack: "Total",
-                data: weather?.map((value: Weather) => value?.temperature),
+                data: getYxis(weather, chartType),
                 areaStyle: {
                     color: "#0F37FF44",
                 },

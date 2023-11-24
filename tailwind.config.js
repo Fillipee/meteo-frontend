@@ -16,6 +16,9 @@ module.exports = {
             },
         },
         extend: {
+            backgroundImage: {
+                sunrise: "url('assets/images/vychod.jpg')",
+            },
             colors: {
                 primaryBlue: {
                     50: "#E0E5FF",
@@ -78,10 +81,16 @@ module.exports = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: 0 },
                 },
+                "rotate-little": {
+                    "0%": { transform: "rotate(0.0deg)" },
+                    "50%": { transform: "rotate(20.0deg)" },
+                    "100%": { transform: "rotate(0.0deg)" },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+                "rotate-little": "rotate-little 0.3s ease-out",
             },
         },
     },

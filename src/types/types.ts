@@ -7,3 +7,5 @@ export type Weather = {
     quality?: number;
     stationId: number;
 } | null;
+
+export type ChartType = "temperature" | "moisture" | "pressure";
