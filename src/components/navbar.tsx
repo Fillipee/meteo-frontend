@@ -1,6 +1,8 @@
+import { format } from "date-fns";
 import blueLogo from "../assets/images/blue_logo.png";
 import whiteLogo from "../assets/images/white_logo.png";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { cs } from "date-fns/locale";
 
 type NavbarProps = {
     station: string;
@@ -31,7 +33,12 @@ export const Navbar = ({ station, setStation }: NavbarProps) => {
                     </SelectContent>
                 </Select>
             </div>
-            <p className="text-sm sm:text-md font-bold text-right">Friday 14:30</p>
+            <p className="text-sm sm:text-md font-bold text-right">
+                {format(new Date(), "eeee")}{" "}
+                {format(new Date(), "p", {
+                    locale: cs,
+                })}
+            </p>
         </header>
     );
 };
