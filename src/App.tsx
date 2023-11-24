@@ -12,6 +12,9 @@ function App() {
     const [weather, setWeather] = useState<Weather[]>([]);
     const [chartType, setChartType] = useState<ChartType>("temperature");
     const [isConnected, setIsConnected] = useState(socket.connected);
+    const [isCelcius, setIsCelsius] = useState(
+        localStorage.getItem("isCelsius") ? localStorage.getItem("isCelsius") === "true" : true
+    );
 
     useEffect(() => {
         function onConnect() {
@@ -43,7 +46,7 @@ function App() {
     return (
         <div className="bg-primaryBlue-50 dark:bg-primaryBlue-900 min-h-screen h-full p-4">
             <Layout station={station} setStation={setStation}>
-                <Banner weather={weather} />
+                <Banner weather={weather} isCelsius={isCelcius} setIsCelsius={setIsCelsius} />
                 <Widgets weather={weather} chartType={chartType} setChartType={setChartType} />
                 <Chart weather={weather} chartType={chartType} period={period} setPeriod={setPeriod} />
             </Layout>

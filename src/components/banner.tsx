@@ -1,16 +1,19 @@
 import { Weather } from "@/types/types";
 import { format, isBefore } from "date-fns";
 import { EditSiteModal } from "./modals/edit-site-modal";
+import { SetStateAction } from "react";
 
 type BannerProps = {
     weather: Weather[] | null;
+    isCelsius: boolean;
+    setIsCelsius: React.Dispatch<SetStateAction<boolean>>;
 };
 
 const isWinter = (day: number, month: number) => {
     return (month === 11 && day > 15) || month === 12 || month === 1 || month === 2;
 };
 
-export const Banner = ({ weather }: BannerProps) => {
+export const Banner = ({ weather, isCelsius, setIsCelsius }: BannerProps) => {
     const getImage = () => {
         const now = new Date();
         const day = parseInt(format(now, "d", { useAdditionalDayOfYearTokens: true }));
@@ -44,6 +47,9 @@ export const Banner = ({ weather }: BannerProps) => {
         return "bg-night";
     };
 
+    const temperature = weather ? weather[0]?.temperature : null;
+    const formattedTemperature = temperature && !isCelsius ? temperature * 1.8 + 32 : temperature;
+
     return (
         <section
             className={`relative ${getImage()} bg-cover bg-right bg-no-repeat z-10
@@ -53,10 +59,11 @@ export const Banner = ({ weather }: BannerProps) => {
             <div>
                 <p className="text-xl text-white">Olomouc, Czechia</p>
                 <p className="text-7xl text-white mt-2 font-semibold">
-                    {weather ? weather[0]?.temperature : ""}°C
+                    {formattedTemperature}
+                    {isCelsius ? "°C" : "°F"}
                 </p>
             </div>
-            <EditSiteModal />
+            <EditSiteModal isCelsius={isCelsius} setIsCelsius={setIsCelsius} />
         </section>
     );
 };
