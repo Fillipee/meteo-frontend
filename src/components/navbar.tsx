@@ -3,15 +3,16 @@ import logo from "../assets/images/logo.png";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 type NavbarProps = {
+    station: string;
     setStation: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const Navbar = ({ setStation }: NavbarProps) => {
+export const Navbar = ({ station, setStation }: NavbarProps) => {
     return (
         <header className="flex gap-x-2 justify-between items-center">
             <div className="flex sm:gap-x-6 items-center">
                 <img src={logo} alt="LOGO" className="h-10 sm:h-12" />
-                <Select onValueChange={setStation}>
+                <Select value={station} onValueChange={setStation}>
                     <SelectTrigger className="max-w-[160px]">
                         <SelectValue placeholder="Choose station" />
                     </SelectTrigger>
