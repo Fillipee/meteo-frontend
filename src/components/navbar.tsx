@@ -1,13 +1,15 @@
-import { Link } from "./ui/link";
 import logo from "../assets/images/logo.png";
+import { PeriodButton } from "./ui/period-button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 type NavbarProps = {
     station: string;
     setStation: React.Dispatch<React.SetStateAction<string>>;
+    period: string;
+    setPeriod: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const Navbar = ({ station, setStation }: NavbarProps) => {
+export const Navbar = ({ station, setStation, period, setPeriod }: NavbarProps) => {
     return (
         <header className="flex gap-x-2 justify-between items-center">
             <div className="flex sm:gap-x-6 items-center">
@@ -23,21 +25,25 @@ export const Navbar = ({ station, setStation }: NavbarProps) => {
                 </Select>
             </div>
             <div className="hidden sm:flex gap-x-4">
-                <Link href="#">Daily</Link>
-                <Link href="#" active>
+                <PeriodButton periodValue="daily" period={period} setPeriod={setPeriod}>
+                    Daily
+                </PeriodButton>
+                <PeriodButton periodValue="weekly" period={period} setPeriod={setPeriod}>
                     Weekly
-                </Link>
-                <Link href="#">Monthly</Link>
+                </PeriodButton>
+                <PeriodButton periodValue="monthly" period={period} setPeriod={setPeriod}>
+                    Monthly
+                </PeriodButton>
             </div>
             <div className="sm:hidden">
-                <Select>
+                <Select value={period} onValueChange={setPeriod}>
                     <SelectTrigger className="max-w-[160px]">
                         <SelectValue placeholder="Choose period" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="1">Daily</SelectItem>
-                        <SelectItem value="2">Weekly</SelectItem>
-                        <SelectItem value="3">Monthly</SelectItem>
+                        <SelectItem value="daily">Daily</SelectItem>
+                        <SelectItem value="weekly">Weekly</SelectItem>
+                        <SelectItem value="monthly">Monthly</SelectItem>
                     </SelectContent>
                 </Select>
             </div>

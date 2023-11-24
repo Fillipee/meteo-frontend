@@ -8,6 +8,7 @@ import { socket } from "./socket";
 
 function App() {
     const [station, setStation] = useState<string>("1");
+    const [period, setPeriod] = useState<string>("weekly");
     const [weather, setWeather] = useState<Weather[]>([]);
     const [chartType, setChartType] = useState<ChartType>("temperature");
     const [isConnected, setIsConnected] = useState(socket.connected);
@@ -39,7 +40,7 @@ function App() {
 
     return (
         <div className="bg-primaryBlue-50 min-h-screen h-full p-4">
-            <Layout station={station} setStation={setStation}>
+            <Layout station={station} setStation={setStation} period={period} setPeriod={setPeriod}>
                 <Banner weather={weather} />
                 <Widgets chartType={chartType} setChartType={setChartType} />
                 <Chart weather={weather} chartType={chartType} />
