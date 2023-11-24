@@ -9,10 +9,10 @@ type NavbarProps = {
 export const Navbar = ({ setStation }: NavbarProps) => {
     return (
         <header className="flex gap-x-2 justify-between items-center">
-            <div className="flex gap-x-6 items-center">
+            <div className="flex sm:gap-x-6 items-center">
                 <img src={logo} alt="LOGO" className="h-10 sm:h-12" />
                 <Select onValueChange={setStation}>
-                    <SelectTrigger className="w-[160px]">
+                    <SelectTrigger className="max-w-[160px]">
                         <SelectValue placeholder="Choose station" />
                     </SelectTrigger>
                     <SelectContent>
@@ -30,17 +30,17 @@ export const Navbar = ({ setStation }: NavbarProps) => {
             </div>
             <div className="sm:hidden">
                 <Select>
-                    <SelectTrigger className="w-[160px]">
+                    <SelectTrigger className="max-w-[160px]">
                         <SelectValue placeholder="Choose period" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="1">Daily</SelectItem>
                         <SelectItem value="2">Weekly</SelectItem>
-                        <SelectItem value="2">Month</SelectItem>
+                        <SelectItem value="3">Monthly</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
-            <p className="text-sm sm:text-md font-bold">Friday 14:30</p>
+            <p className="text-sm sm:text-md font-bold text-right">Friday 14:30</p>
         </header>
     );
 };

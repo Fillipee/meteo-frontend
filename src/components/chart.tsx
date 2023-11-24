@@ -1,7 +1,12 @@
+import { Weather } from "@/types/types";
+import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
-import "echarts/lib/component/graphic";
 
-export const Chart = () => {
+type ChartProps = {
+    weather: Weather[] | null;
+};
+
+export const Chart = ({ weather }: ChartProps) => {
     const option = {
         tooltip: {
             trigger: "axis",
@@ -9,7 +14,9 @@ export const Chart = () => {
         xAxis: {
             type: "category",
             boundaryGap: false,
-            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            data: weather?.map((value: Weather) =>
+                format(value?.time ? new Date(value?.time) : new Date(), "PPpp")
+            ),
         },
         yAxis: {
             type: "value",
@@ -22,7 +29,7 @@ export const Chart = () => {
                 name: "Temperature",
                 type: "line",
                 stack: "Total",
-                data: [120, 132, 101, 134, 90, 230, 210],
+                data: weather?.map((value: Weather) => value?.temperature),
                 areaStyle: {
                     color: "#0F37FF44",
                 },
