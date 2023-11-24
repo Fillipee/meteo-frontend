@@ -31,7 +31,7 @@ export const Chart = () => {
     };
 
     return (
-        <section className="w-full bg-white rounded-3xl">
+        <section className="w-full bg-white rounded-3xl shadow">
             <ReactEcharts option={option} />
         </section>
     );

@@ -2,12 +2,16 @@ import { Link } from "./ui/link";
 import logo from "../assets/images/logo.png";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
-export const Navbar = () => {
+type NavbarProps = {
+    setStation: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const Navbar = ({ setStation }: NavbarProps) => {
     return (
         <header className="flex gap-x-2 justify-between items-center">
             <div className="flex gap-x-6 items-center">
-                <img src={logo} alt="LOGO" className="h-12" />
-                <Select>
+                <img src={logo} alt="LOGO" className="h-10 sm:h-12" />
+                <Select onValueChange={setStation}>
                     <SelectTrigger className="w-[160px]">
                         <SelectValue placeholder="Choose station" />
                     </SelectTrigger>
@@ -24,7 +28,19 @@ export const Navbar = () => {
                 </Link>
                 <Link href="#">Monthly</Link>
             </div>
-            <p className="font-bold">Friday 14:30</p>
+            <div className="sm:hidden">
+                <Select>
+                    <SelectTrigger className="w-[160px]">
+                        <SelectValue placeholder="Choose period" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="1">Daily</SelectItem>
+                        <SelectItem value="2">Weekly</SelectItem>
+                        <SelectItem value="2">Month</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+            <p className="text-sm sm:text-md font-bold">Friday 14:30</p>
         </header>
     );
 };

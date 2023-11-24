@@ -6,6 +6,8 @@ import { Widgets } from "./components/widgets";
 import { Chart } from "./components/chart";
 
 function App() {
+    const [station, setStation] = useState<string>("1");
+
     // const [data, setData] = useState<{ message: string } | null>(null);
 
     // useEffect(() => {
@@ -21,7 +23,7 @@ function App() {
 
     return (
         <div className="bg-primaryBlue-50 min-h-screen h-full p-4">
-            <Layout>
+            <Layout setStation={setStation}>
                 <Banner />
                 <Widgets />
                 <Chart />
