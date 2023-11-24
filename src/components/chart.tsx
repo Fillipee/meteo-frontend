@@ -1,10 +1,13 @@
 import { ChartType, Weather } from "@/types/types";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
+import { PeriodButton } from "./ui/period-button";
 
 type ChartProps = {
     weather: Weather[] | null;
     chartType: ChartType;
+    period: string;
+    setPeriod: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const getXAxis = (weather: Weather[] | null, chartType: ChartType) => {
@@ -31,7 +34,7 @@ const getYxis = (weather: Weather[] | null, chartType: ChartType) => {
     }
 };
 
-export const Chart = ({ weather, chartType }: ChartProps) => {
+export const Chart = ({ weather, chartType, period, setPeriod }: ChartProps) => {
     const option = {
         tooltip: {
             trigger: "axis",
@@ -62,6 +65,17 @@ export const Chart = ({ weather, chartType }: ChartProps) => {
 
     return (
         <section className="w-full bg-white rounded-3xl shadow-lg">
+            <div className="flex gap-x-4 px-20 pt-8 pb-2">
+                <PeriodButton periodValue="daily" period={period} setPeriod={setPeriod}>
+                    Daily
+                </PeriodButton>
+                <PeriodButton periodValue="weekly" period={period} setPeriod={setPeriod}>
+                    Weekly
+                </PeriodButton>
+                <PeriodButton periodValue="monthly" period={period} setPeriod={setPeriod}>
+                    Monthly
+                </PeriodButton>
+            </div>
             <ReactEcharts option={option} />
         </section>
     );
