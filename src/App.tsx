@@ -42,7 +42,7 @@ function App() {
         <div className="bg-primaryBlue-50 min-h-screen h-full p-4">
             <Layout station={station} setStation={setStation} period={period} setPeriod={setPeriod}>
                 <Banner weather={weather} />
-                <Widgets chartType={chartType} setChartType={setChartType} />
+                <Widgets weather={weather} chartType={chartType} setChartType={setChartType} />
                 <Chart weather={weather} chartType={chartType} />
             </Layout>
         </div>

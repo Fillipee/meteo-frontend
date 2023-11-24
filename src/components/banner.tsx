@@ -20,7 +20,6 @@ export const Banner = ({ weather }: BannerProps) => {
 
         const isDayTime = isBefore(new Date(year, month, day, hour), new Date(year, month, day, 16));
 
-        console.log(isDayTime);
         if (isDayTime) {
             if (hour > 0 && hour < 7) {
                 return "bg-sunrise";
