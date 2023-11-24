@@ -3,6 +3,7 @@ import blueLogo from "../assets/images/blue_logo.png";
 import whiteLogo from "../assets/images/white_logo.png";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { cs } from "date-fns/locale";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 
 type NavbarProps = {
     station: string;
@@ -34,12 +35,19 @@ export const Navbar = ({ station, setStation, darkMode }: NavbarProps) => {
                     </SelectContent>
                 </Select>
             </div>
-            <p className="text-sm sm:text-md font-bold text-right">
-                {format(new Date(), "eeee")}{" "}
-                {format(new Date(), "p", {
-                    locale: cs,
-                })}
-            </p>
+            <TooltipProvider>
+                <Tooltip delayDuration={100}>
+                    <TooltipTrigger className="text-sm sm:text-md font-bold text-right">
+                        {format(new Date(), "eeee")}{" "}
+                        {format(new Date(), "p", {
+                            locale: cs,
+                        })}
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        {format(new Date(), "PPP")}{" "}
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
         </header>
     );
 };
