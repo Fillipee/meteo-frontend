@@ -17,7 +17,15 @@ module.exports = {
         },
         extend: {
             backgroundImage: {
-                sunrise: "url('assets/images/vychod.jpg')",
+                sunrise: "url('assets/images/sunrise.jpg')",
+                sunset: "url('assets/images/sunset.jpg')",
+                sun: "url('assets/images/sun.jpg')",
+                rain: "url('assets/images/rain.jpg')",
+                storm: "url('assets/images/storm.jpg')",
+                snow: "url('assets/images/snow.jpg')",
+                night: "url('assets/images/night.jpg')",
+                nightRain: "url('assets/images/night_rain.jpg')",
+                nightSnow: "url('assets/images/night_snow.jpg')",
             },
             colors: {
                 primaryBlue: {
