@@ -20,7 +20,7 @@ function App() {
     // }, []);
 
     return (
-        <div className="bg-primary-50 min-h-screen h-full p-4">
+        <div className="bg-primaryBlue-50 min-h-screen h-full p-4">
             <Layout>
                 <Banner />
                 <Widgets />
