@@ -1,6 +1,6 @@
 import { Weather } from "@/types/types";
 import { format, isBefore } from "date-fns";
-import { EditStationModal } from "./modals/edit-station-modal";
+import { EditSiteModal } from "./modals/edit-site-modal";
 
 type BannerProps = {
     weather: Weather[] | null;
@@ -56,7 +56,7 @@ export const Banner = ({ weather }: BannerProps) => {
                     {weather ? weather[0]?.temperature : ""}°C
                 </p>
             </div>
-            <EditStationModal />
+            <EditSiteModal />
         </section>
     );
 };

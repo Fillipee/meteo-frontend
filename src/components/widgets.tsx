@@ -11,7 +11,7 @@ type WidgetsProps = {
 export const Widgets = ({ weather, chartType, setChartType }: WidgetsProps) => {
     const lastWeather: Weather | null = weather ? weather[weather?.length - 1] : null;
 
-    console.log(weather)
+    // console.log(weather)
     return (
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Widget

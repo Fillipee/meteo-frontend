@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "../ui/dialog";
+import { Switch } from "../ui/switch";
+import { Settings } from "lucide-react";
 
 export const EditSiteModal = () => {
     const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -21,19 +22,18 @@ export const EditSiteModal = () => {
         localStorage.setItem("darkMode", darkMode === true ? "true" : "false");
     }, [darkMode]);
 
-    const toggleDarkMode = () => {
-        setDarkMode((prevMode) => !prevMode);
-    };
-
     return (
         <Dialog>
-            <DialogTrigger className="h-fit">Úprava stránky</DialogTrigger>
+            <DialogTrigger className="h-fit">
+                <Settings className="mt-4 h-6 w-6 cursor-pointer hover:animate-rotate-little" color="#fff" />
+            </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Nastavení stránky</DialogTitle>
-                    <button onClick={toggleDarkMode} className="px-4 py-2 rounded-md bg-gray-800 text-white">
-                        {darkMode ? "Light Mode" : "Dark Mode"}
-                    </button>
+                    <div className="pt-8 flex gap-x-4 items-center">
+                        <Switch checked={darkMode} onCheckedChange={setDarkMode} />
+                        Dark Mode
+                    </div>
                 </DialogHeader>
             </DialogContent>
         </Dialog>
