@@ -13,7 +13,7 @@ export const Widget = ({ text, value, chartTypeValue, currentChartType, setChart
     return (
         <button
             onClick={() => setChartType(chartTypeValue)}
-            className={`w-full flex flex-col items-start px-6 py-4 rounded-3xl shadow cursor-pointer transition-colors duration-200 ${
+            className={`w-full flex flex-col items-start px-6 py-4 rounded-3xl shadow-lg cursor-pointer transition-colors duration-200 ${
                 chartTypeValue === currentChartType
                     ? "bg-primaryBlue-100 hover:bg-primaryBlue-200"
                     : "bg-white hover:bg-primaryBlue-100"

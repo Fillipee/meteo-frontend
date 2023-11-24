@@ -3,7 +3,7 @@ export type Weather = {
     time: Date;
     temperature?: number;
     humidity?: number;
-    pressury?: number;
+    pressure?: number;
     quality?: number;
     stationId: number;
 } | null;

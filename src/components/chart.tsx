@@ -25,7 +25,7 @@ const getYxis = (weather: Weather[] | null, chartType: ChartType) => {
         case "moisture":
             return weather?.map((value: Weather) => value?.humidity);
         case "pressure":
-            return weather?.map((value: Weather) => value?.pressury);
+            return weather?.map((value: Weather) => value?.pressure);
         default:
             return [];
     }
@@ -61,7 +61,7 @@ export const Chart = ({ weather, chartType }: ChartProps) => {
     };
 
     return (
-        <section className="w-full bg-white rounded-3xl shadow">
+        <section className="w-full bg-white rounded-3xl shadow-lg">
             <ReactEcharts option={option} />
         </section>
     );

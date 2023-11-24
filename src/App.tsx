@@ -15,10 +15,12 @@ function App() {
 
     useEffect(() => {
         function onConnect() {
+            console.log("Connected")
             setIsConnected(true);
         }
 
         function onDisconnect() {
+            console.log("Disconnected")
             setIsConnected(false);
         }
 

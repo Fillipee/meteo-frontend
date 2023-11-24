@@ -15,7 +15,7 @@ export const Navbar = ({ station, setStation, period, setPeriod }: NavbarProps) 
             <div className="flex sm:gap-x-6 items-center">
                 <img src={logo} alt="LOGO" className="h-10 sm:h-12" />
                 <Select value={station} onValueChange={setStation}>
-                    <SelectTrigger className="max-w-[160px]">
+                    <SelectTrigger className="w-[110px] sm:w-[160px]">
                         <SelectValue placeholder="Choose station" />
                     </SelectTrigger>
                     <SelectContent>
@@ -37,7 +37,7 @@ export const Navbar = ({ station, setStation, period, setPeriod }: NavbarProps) 
             </div>
             <div className="sm:hidden">
                 <Select value={period} onValueChange={setPeriod}>
-                    <SelectTrigger className="max-w-[160px]">
+                    <SelectTrigger className="w-[110px]">
                         <SelectValue placeholder="Choose period" />
                     </SelectTrigger>
                     <SelectContent>

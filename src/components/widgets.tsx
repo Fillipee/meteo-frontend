@@ -11,6 +11,7 @@ type WidgetsProps = {
 export const Widgets = ({ weather, chartType, setChartType }: WidgetsProps) => {
     const lastWeather: Weather | null = weather ? weather[weather?.length - 1] : null;
 
+    console.log(weather)
     return (
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Widget
@@ -29,7 +30,7 @@ export const Widgets = ({ weather, chartType, setChartType }: WidgetsProps) => {
             />
             <Widget
                 text="Pressure"
-                value={lastWeather?.pressury ? `${lastWeather.pressury.toString()}hPa` : ""}
+                value={lastWeather?.pressure ? `${lastWeather.pressure.toString()}hPa` : ""}
                 chartTypeValue="pressure"
                 currentChartType={chartType}
                 setChartType={setChartType}
