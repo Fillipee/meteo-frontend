@@ -57,14 +57,14 @@ export const Chart = ({ weather, chartType, period, setPeriod }: ChartProps) => 
                 stack: "Total",
                 data: getYxis(weather, chartType),
                 areaStyle: {
-                    color: "#0F37FF44",
+                    color: localStorage.getItem("darkMode") === "true" ? "#0F37FF44" : "#fff",
                 },
             },
         ],
     };
 
     return (
-        <section className="w-full bg-white rounded-3xl shadow-lg">
+        <section className="w-full bg-white dark:bg-primaryBlue-800 rounded-3xl shadow-lg">
             <div className="flex gap-x-4 px-20 pt-8 pb-2">
                 <PeriodButton periodValue="daily" period={period} setPeriod={setPeriod}>
                     Daily

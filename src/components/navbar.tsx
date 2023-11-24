@@ -1,4 +1,5 @@
 import logo from "../assets/images/logo.png";
+import { EditSiteModal } from "./modals/edit-site-modal";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 type NavbarProps = {
@@ -21,6 +22,7 @@ export const Navbar = ({ station, setStation }: NavbarProps) => {
                     </SelectContent>
                 </Select>
             </div>
+            <EditSiteModal />
             <p className="text-sm sm:text-md font-bold text-right">Friday 14:30</p>
         </header>
     );
