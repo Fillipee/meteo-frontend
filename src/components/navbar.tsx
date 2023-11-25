@@ -6,7 +6,7 @@ import { cs } from "date-fns/locale";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import { EditStationModal } from "./modals/edit-station-modal";
 import { AddStationModal } from "./modals/add-station-modal";
-import { Station } from "@/types/types";
+import { Station, Weather } from "@/types/types";
 
 type NavbarProps = {
     station: string;
@@ -16,6 +16,7 @@ type NavbarProps = {
 };
 
 export const Navbar = ({ station, setStation, darkMode, stations }: NavbarProps) => {
+
     return (
         <header className="flex gap-x-2 justify-between items-center">
             <div className="flex sm:gap-x-6 items-center">
@@ -29,7 +30,13 @@ export const Navbar = ({ station, setStation, darkMode, stations }: NavbarProps)
                     </>
                 )}
 
-                <Select value={station.toString()} onValueChange={setStation}>
+                <Select
+                    value={station.toString()}
+                    onValueChange={(value) => {
+                        setStation(value);
+                        localStorage.setItem("stationId", value);
+                    }}
+                >
                     <SelectTrigger className="w-[110px] sm:w-[160px]">
                         <SelectValue placeholder="Choose station" />
                     </SelectTrigger>

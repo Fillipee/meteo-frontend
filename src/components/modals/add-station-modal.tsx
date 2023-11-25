@@ -33,7 +33,7 @@ export const AddStationModal = ({ darkMode }: AddStationModal) => {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle className="mb-4">Úprava stanice</DialogTitle>
+                    <DialogTitle className="mb-4">Přidání stanice</DialogTitle>
                     <Label htmlFor="name" className="text-left">
                         Name
                     </Label>

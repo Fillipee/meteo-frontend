@@ -6,10 +6,11 @@ import { Chart } from "./components/chart";
 import { ChartType, ChartValues, Station, Weather } from "./types/types";
 import { socket } from "./socket";
 import axios from "axios";
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet";
 
 function App() {
-    const [station, setStation] = useState<string>("");
+    const localStation = localStorage.getItem("stationId") ? localStorage.getItem("stationId") : "";
+    const [station, setStation] = useState<string>(localStation ? localStation : "");
     const [stations, setStations] = useState<Station[]>([]);
 
     const [weather, setWeather] = useState<Weather>(null);
@@ -30,10 +31,6 @@ function App() {
     const [pressureUnit, setPressureUnit] = useState<string>(localPressureUnit ? localPressureUnit : "kpa");
 
     const [chartValues, setChartValues] = useState<ChartValues>({
-        // min: [10, 30, 40, 50],
-        // max: [50, 60, 70, 90],
-        // mean: [30, 40, 60, 70],
-        // time: [new Date(), new Date(), new Date(), new Date()],
         min: [],
         max: [],
         mean: [],
@@ -52,10 +49,9 @@ function App() {
         axios.get(`http://10.74.5.224:8000/api/v1/stations`).then((res) => {
             setStations(res.data);
             setStation(res.data[0].id);
+            localStorage.setItem("stationId", res.data[0].id);
         });
-    }, []);
 
-    useEffect(() => {
         function onConnect() {
             setIsConnected(true);
         }
@@ -65,12 +61,15 @@ function App() {
         }
 
         function onWeatherEvent(value: Weather) {
-            setWeather(value);
+            const stat = localStorage.getItem("stationId");
+            if (stat && parseInt(stat) === value?.stationId) {
+                setWeather(value);
+            }
         }
 
         socket.on("connect", onConnect);
         socket.on("disconnect", onDisconnect);
-        socket.on("weather", onWeatherEvent);
+        socket.on("weather", (value) => onWeatherEvent(value));
 
         return () => {
             socket.off("connect", onConnect);
@@ -93,6 +92,7 @@ function App() {
                     setDarkMode={setDarkMode}
                     pressureUnit={pressureUnit}
                     setPressureUnit={setPressureUnit}
+                    station={station}
                 />
                 <Widgets
                     weather={weather}
@@ -100,6 +100,7 @@ function App() {
                     setChartType={setChartType}
                     pressureUnit={pressureUnit}
                     temperatureUnit={temperatureUnit}
+                    darkMode={darkMode}
                 />
                 <Chart
                     chartType={chartType}

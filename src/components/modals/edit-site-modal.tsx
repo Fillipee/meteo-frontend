@@ -45,7 +45,7 @@ export const EditSiteModal = ({
                         Dark Mode
                     </div>
                     <div className="pt-4">
-                        <p className="text-xl mb-4">Temperature units</p>
+                        <p className="text-xl mb-4 text-left">Temperature units</p>
                         <RadioGroup
                             defaultValue="c"
                             value={temperatureUnit}
@@ -75,7 +75,7 @@ export const EditSiteModal = ({
                         </RadioGroup>
                     </div>
                     <div className="pt-4">
-                        <p className="text-xl mb-4">Pressure units</p>
+                        <p className="text-xl mb-4 text-left">Pressure units</p>
                         <RadioGroup
                             defaultValue="c"
                             value={pressureUnit}

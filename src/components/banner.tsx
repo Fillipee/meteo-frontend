@@ -1,7 +1,7 @@
 import { Weather } from "@/types/types";
 import { format, isBefore } from "date-fns";
 import { EditSiteModal } from "./modals/edit-site-modal";
-import { SetStateAction } from "react";
+import { SetStateAction, useState } from "react";
 import { getTemperature } from "../lib/utils";
 
 type BannerProps = {
@@ -12,6 +12,7 @@ type BannerProps = {
     setDarkMode: React.Dispatch<SetStateAction<boolean>>;
     pressureUnit: string;
     setPressureUnit: React.Dispatch<SetStateAction<string>>;
+    station: string;
 };
 
 const isWinter = (day: number, month: number) => {
@@ -26,6 +27,7 @@ export const Banner = ({
     setDarkMode,
     pressureUnit,
     setPressureUnit,
+    station,
 }: BannerProps) => {
     const getImage = () => {
         const now = new Date();

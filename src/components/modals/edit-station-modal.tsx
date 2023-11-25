@@ -49,7 +49,7 @@ export const EditStationModal = ({ darkMode, stationId, stations }: EditStationM
                     </Label>
                     <Input value={name} onChange={(e) => setName(e.target.value)} id="name" />
                     <Label htmlFor="ip" className="text-left">
-                        Ip
+                        IP
                     </Label>
                     <Input value={ip} onChange={(e) => setIp(e.target.value)} id="ip" />
                     <div className="flex justify-between">

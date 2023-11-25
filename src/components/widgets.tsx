@@ -2,6 +2,12 @@ import { SetStateAction } from "react";
 import { Widget } from "./widget";
 import { ChartType, Data, Weather } from "@/types/types";
 import { getTemperature } from "../lib/utils";
+import temperatureBlue from "../assets/images/teplota_blue.png";
+import temperatureWhite from "../assets/images/teplota_white.png";
+import pressureBlue from "../assets/images/tlak_blue.png";
+import pressureWhite from "../assets/images/tlak_white.png";
+import moistureBlue from "../assets/images/vlhkost_blue.png";
+import moistureWhite from "../assets/images/vlhkost_white.png";
 
 type WidgetsProps = {
     weather: Weather | null;
@@ -9,6 +15,7 @@ type WidgetsProps = {
     setChartType: React.Dispatch<SetStateAction<ChartType>>;
     pressureUnit: string;
     temperatureUnit: string;
+    darkMode: boolean;
 };
 
 const getPressureValue = (weather: Data, pressureUnit: string) => {
@@ -36,6 +43,7 @@ export const Widgets = ({
     setChartType,
     pressureUnit,
     temperatureUnit,
+    darkMode,
 }: WidgetsProps) => {
     const lastWeather: Data = weather ? weather.data[weather.data?.length - 1] : null;
 
@@ -54,6 +62,9 @@ export const Widgets = ({
                 chartTypeValue="temperature"
                 currentChartType={chartType}
                 setChartType={setChartType}
+                logoLight={temperatureBlue}
+                logoDark={temperatureWhite}
+                darkMode={darkMode}
             />
             <Widget
                 text="Moisture"
@@ -61,6 +72,9 @@ export const Widgets = ({
                 chartTypeValue="humidity"
                 currentChartType={chartType}
                 setChartType={setChartType}
+                logoLight={moistureBlue}
+                logoDark={moistureWhite}
+                darkMode={darkMode}
             />
             <Widget
                 text="Pressure"
@@ -68,6 +82,9 @@ export const Widgets = ({
                 chartTypeValue="pressure"
                 currentChartType={chartType}
                 setChartType={setChartType}
+                logoLight={pressureBlue}
+                logoDark={pressureWhite}
+                darkMode={darkMode}
             />
         </section>
     );
