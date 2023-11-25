@@ -1,12 +1,14 @@
 import { SetStateAction } from "react";
 import { Widget } from "./widget";
 import { ChartType, Weather } from "@/types/types";
+import { getTemperature } from "../lib/utils";
 
 type WidgetsProps = {
     weather: Weather[] | null;
     chartType: ChartType;
     setChartType: React.Dispatch<SetStateAction<ChartType>>;
     pressureUnit: string;
+    temperatureUnit: string;
 };
 
 const getPressureValue = (weather: Weather, pressureUnit: string) => {
@@ -28,16 +30,27 @@ const getPressureValue = (weather: Weather, pressureUnit: string) => {
     }
 };
 
-export const Widgets = ({ weather, chartType, setChartType, pressureUnit }: WidgetsProps) => {
+export const Widgets = ({
+    weather,
+    chartType,
+    setChartType,
+    pressureUnit,
+    temperatureUnit,
+}: WidgetsProps) => {
     const lastWeather: Weather | null = weather ? weather[weather?.length - 1] : null;
 
     const pressureValue = getPressureValue(lastWeather, pressureUnit);
+
+    const temperature = weather ? weather[0]?.temperature : null;
+    const formattedTemperature = getTemperature(temperature, temperatureUnit);
 
     return (
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Widget
                 text="Temperature"
-                value={lastWeather?.temperature ? `${lastWeather.temperature.toString()}°C` : ""}
+                value={`${parseFloat(formattedTemperature.toString()).toFixed(2)}${
+                    temperatureUnit !== "k" ? "°" : ""
+                }${temperatureUnit.toUpperCase()}`}
                 chartTypeValue="temperature"
                 currentChartType={chartType}
                 setChartType={setChartType}

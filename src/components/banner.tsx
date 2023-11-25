@@ -2,6 +2,7 @@ import { Weather } from "@/types/types";
 import { format, isBefore } from "date-fns";
 import { EditSiteModal } from "./modals/edit-site-modal";
 import { SetStateAction } from "react";
+import { getTemperature } from "../lib/utils";
 
 type BannerProps = {
     weather: Weather[] | null;
@@ -15,23 +16,6 @@ type BannerProps = {
 
 const isWinter = (day: number, month: number) => {
     return (month === 11 && day > 15) || month === 12 || month === 1 || month === 2;
-};
-
-const getTemperature = (temperature: number | null | undefined, temperatureUnit: string) => {
-    if (!temperature) {
-        return 0;
-    }
-
-    switch (temperatureUnit) {
-        case "c":
-            return temperature;
-        case "f":
-            return temperature * 1.8 + 32;
-        case "k":
-            return temperature + 273;
-        default:
-            return temperature;
-    }
 };
 
 export const Banner = ({
@@ -88,7 +72,7 @@ export const Banner = ({
             <div>
                 <p className="text-xl text-white">Olomouc, Czechia</p>
                 <p className="text-7xl text-white mt-2 font-semibold">
-                    {formattedTemperature}
+                    {parseFloat(formattedTemperature.toString()).toFixed(2)}
                     {`${temperatureUnit !== "k" ? "°" : ""}${temperatureUnit.toUpperCase()}`}
                 </p>
             </div>

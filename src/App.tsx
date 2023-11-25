@@ -68,6 +68,7 @@ function App() {
                     chartType={chartType}
                     setChartType={setChartType}
                     pressureUnit={pressureUnit}
+                    temperatureUnit={temperatureUnit}
                 />
                 <Chart weather={weather} chartType={chartType} period={period} setPeriod={setPeriod} />
             </Layout>
