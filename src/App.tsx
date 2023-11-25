@@ -16,6 +16,10 @@ function App() {
     const [isCelcius, setIsCelsius] = useState(
         localStorage.getItem("isCelsius") ? localStorage.getItem("isCelsius") === "true" : true
     );
+    const localPressureUnit = localStorage.getItem("pressureUnit")
+        ? localStorage.getItem("pressureUnit")
+        : "kpa";
+    const [pressureUnit, setPressureUnit] = useState<string>(localPressureUnit ? localPressureUnit : "kpa");
 
     useEffect(() => {
         function onConnect() {
@@ -53,6 +57,8 @@ function App() {
                     setIsCelsius={setIsCelsius}
                     darkMode={darkMode}
                     setDarkMode={setDarkMode}
+                    pressureUnit={pressureUnit}
+                    setPressureUnit={setPressureUnit}
                 />
                 <Widgets weather={weather} chartType={chartType} setChartType={setChartType} />
                 <Chart weather={weather} chartType={chartType} period={period} setPeriod={setPeriod} />

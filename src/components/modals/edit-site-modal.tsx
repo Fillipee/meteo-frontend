@@ -10,9 +10,18 @@ type EditSiteModalProps = {
     setIsCelsius: React.Dispatch<SetStateAction<boolean>>;
     darkMode: boolean;
     setDarkMode: React.Dispatch<SetStateAction<boolean>>;
+    pressureUnit: string;
+    setPressureUnit: React.Dispatch<SetStateAction<string>>;
 };
 
-export const EditSiteModal = ({ isCelsius, setIsCelsius, darkMode, setDarkMode }: EditSiteModalProps) => {
+export const EditSiteModal = ({
+    isCelsius,
+    setIsCelsius,
+    darkMode,
+    setDarkMode,
+    pressureUnit,
+    setPressureUnit,
+}: EditSiteModalProps) => {
     useEffect(() => {
         const isDarkMode = localStorage.getItem("darkMode") === "true";
         setDarkMode(isDarkMode);
@@ -55,6 +64,48 @@ export const EditSiteModal = ({ isCelsius, setIsCelsius, darkMode, setDarkMode }
                                 <RadioGroupItem value="f" id="f" />
                                 <Label htmlFor="f" className="text-md">
                                     Fahrenheit (F°)
+                                </Label>
+                            </div>
+                        </RadioGroup>
+                    </div>
+                    <div className="pt-4">
+                        <p className="text-xl mb-4">Pressure units</p>
+                        <RadioGroup
+                            defaultValue="c"
+                            value={pressureUnit}
+                            onValueChange={(value) => {
+                                setPressureUnit(value);
+                                localStorage.setItem("pressureUnit", value);
+                            }}
+                        >
+                            <div className="flex items-center gap-x-3">
+                                <RadioGroupItem value="kpa" id="kpa" />
+                                <Label htmlFor="kpa" className="text-md">
+                                    Kilopascals (kPa)
+                                </Label>
+                            </div>
+                            <div className="flex items-center gap-x-3">
+                                <RadioGroupItem value="hpa" id="hpa" />
+                                <Label htmlFor="hpa" className="text-md">
+                                    Hectopascals (hPa)
+                                </Label>
+                            </div>
+                            <div className="flex items-center gap-x-3">
+                                <RadioGroupItem value="mbar" id="mbar" />
+                                <Label htmlFor="mbar" className="text-md">
+                                    Millibars (mbar)
+                                </Label>
+                            </div>
+                            <div className="flex items-center gap-x-3">
+                                <RadioGroupItem value="inhg" id="inhg" />
+                                <Label htmlFor="inhg" className="text-md">
+                                    Inches of mercury (inHg)
+                                </Label>
+                            </div>
+                            <div className="flex items-center gap-x-3">
+                                <RadioGroupItem value="mmhg" id="mmhg" />
+                                <Label htmlFor="mmhg" className="text-md">
+                                    Millimeters of mercury (mm Hg)
                                 </Label>
                             </div>
                         </RadioGroup>
