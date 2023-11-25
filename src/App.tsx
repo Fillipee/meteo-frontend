@@ -13,9 +13,12 @@ function App() {
     const [chartType, setChartType] = useState<ChartType>("temperature");
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [darkMode, setDarkMode] = useState<boolean>(false);
-    const [isCelcius, setIsCelsius] = useState(
-        localStorage.getItem("isCelsius") ? localStorage.getItem("isCelsius") === "true" : true
-    );
+
+    const localTemperatureUnit = localStorage.getItem("temperatureUnit")
+        ? localStorage.getItem("temperatureUnit")
+        : "kpa";
+    const [temperatureUnit, setTemperatureUnit] = useState(localTemperatureUnit ? localTemperatureUnit : "c");
+
     const localPressureUnit = localStorage.getItem("pressureUnit")
         ? localStorage.getItem("pressureUnit")
         : "kpa";
@@ -53,8 +56,8 @@ function App() {
             <Layout station={station} setStation={setStation} darkMode={darkMode}>
                 <Banner
                     weather={weather}
-                    isCelsius={isCelcius}
-                    setIsCelsius={setIsCelsius}
+                    temperatureUnit={temperatureUnit}
+                    setTemperatureUnit={setTemperatureUnit}
                     darkMode={darkMode}
                     setDarkMode={setDarkMode}
                     pressureUnit={pressureUnit}

@@ -6,8 +6,8 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 
 type EditSiteModalProps = {
-    isCelsius: boolean;
-    setIsCelsius: React.Dispatch<SetStateAction<boolean>>;
+    temperatureUnit: string;
+    setTemperatureUnit: React.Dispatch<SetStateAction<string>>;
     darkMode: boolean;
     setDarkMode: React.Dispatch<SetStateAction<boolean>>;
     pressureUnit: string;
@@ -15,8 +15,8 @@ type EditSiteModalProps = {
 };
 
 export const EditSiteModal = ({
-    isCelsius,
-    setIsCelsius,
+    temperatureUnit,
+    setTemperatureUnit,
     darkMode,
     setDarkMode,
     pressureUnit,
@@ -48,10 +48,10 @@ export const EditSiteModal = ({
                         <p className="text-xl mb-4">Temperature units</p>
                         <RadioGroup
                             defaultValue="c"
-                            value={isCelsius ? "c" : "f"}
+                            value={temperatureUnit}
                             onValueChange={(value) => {
-                                setIsCelsius(value === "c");
-                                localStorage.setItem("isCelsius", value === "c" ? "true" : "false");
+                                setTemperatureUnit(value);
+                                localStorage.setItem("temperatureUnit", value);
                             }}
                         >
                             <div className="flex items-center gap-x-3">
@@ -64,6 +64,12 @@ export const EditSiteModal = ({
                                 <RadioGroupItem value="f" id="f" />
                                 <Label htmlFor="f" className="text-md">
                                     Fahrenheit (F°)
+                                </Label>
+                            </div>
+                            <div className="flex items-center gap-x-3">
+                                <RadioGroupItem value="k" id="k" />
+                                <Label htmlFor="k" className="text-md">
+                                    Kelvin (K)
                                 </Label>
                             </div>
                         </RadioGroup>

@@ -5,8 +5,8 @@ import { SetStateAction } from "react";
 
 type BannerProps = {
     weather: Weather[] | null;
-    isCelsius: boolean;
-    setIsCelsius: React.Dispatch<SetStateAction<boolean>>;
+    temperatureUnit: string;
+    setTemperatureUnit: React.Dispatch<SetStateAction<string>>;
     darkMode: boolean;
     setDarkMode: React.Dispatch<SetStateAction<boolean>>;
     pressureUnit: string;
@@ -17,10 +17,27 @@ const isWinter = (day: number, month: number) => {
     return (month === 11 && day > 15) || month === 12 || month === 1 || month === 2;
 };
 
+const getTemperature = (temperature: number | null | undefined, temperatureUnit: string) => {
+    if (!temperature) {
+        return 0;
+    }
+
+    switch (temperatureUnit) {
+        case "c":
+            return temperature;
+        case "f":
+            return temperature * 1.8 + 32;
+        case "k":
+            return temperature + 273;
+        default:
+            return temperature;
+    }
+};
+
 export const Banner = ({
     weather,
-    isCelsius,
-    setIsCelsius,
+    temperatureUnit,
+    setTemperatureUnit,
     darkMode,
     setDarkMode,
     pressureUnit,
@@ -60,7 +77,7 @@ export const Banner = ({
     };
 
     const temperature = weather ? weather[0]?.temperature : null;
-    const formattedTemperature = temperature && !isCelsius ? temperature * 1.8 + 32 : temperature;
+    const formattedTemperature = getTemperature(temperature, temperatureUnit);
 
     return (
         <section
@@ -72,12 +89,12 @@ export const Banner = ({
                 <p className="text-xl text-white">Olomouc, Czechia</p>
                 <p className="text-7xl text-white mt-2 font-semibold">
                     {formattedTemperature}
-                    {isCelsius ? "°C" : "°F"}
+                    {`${temperatureUnit !== "k" ? "°" : ""}${temperatureUnit.toUpperCase()}`}
                 </p>
             </div>
             <EditSiteModal
-                isCelsius={isCelsius}
-                setIsCelsius={setIsCelsius}
+                temperatureUnit={temperatureUnit}
+                setTemperatureUnit={setTemperatureUnit}
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}
                 pressureUnit={pressureUnit}
