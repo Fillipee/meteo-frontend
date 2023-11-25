@@ -36,7 +36,7 @@ export const Widget = ({
             }`}
         >
             <div>
-                <p className="font-bold">{text}</p>
+                <p className="font-bold text-left">{text}</p>
                 <p className="text-3xl">{value}</p>
             </div>
 

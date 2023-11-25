@@ -53,7 +53,7 @@ export const Widgets = ({
     const formattedTemperature = getTemperature(temperature, temperatureUnit);
 
     return (
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Widget
                 text="Temperature"
                 value={`${parseFloat(formattedTemperature.toString()).toFixed(2)}${

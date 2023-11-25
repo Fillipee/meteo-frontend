@@ -9,7 +9,7 @@ export const PeriodButton = ({ children, periodValue, period, setPeriod }: Perio
     return (
         <button
             onClick={() => setPeriod(periodValue)}
-            className={`text-primaryBlue-800 hover:text-primaryBlue-900 cursor-pointer hover:font-bold ${
+            className={`text-primaryBlue-800 dark:text-primaryBlue-100 hover:text-primaryBlue-900 cursor-pointer hover:font-bold ${
                 periodValue === period && "font-bold "
             }`}
         >

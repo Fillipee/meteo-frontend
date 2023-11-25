@@ -71,8 +71,8 @@ export const Chart = ({ chartType, chartValues, period, setPeriod }: ChartProps)
 
     return (
         <section className="w-full bg-white dark:bg-primaryBlue-800 rounded-3xl shadow-lg">
-            <div className="flex items-center justify-between">
-                <div className="flex gap-x-4 px-20 pt-8 pb-2">
+            <div className="flex flex-col sm:flex-row items-center justify-between mt-6">
+                <div className="flex flex-row gap-x-4 px-20 pb-2">
                     <PeriodButton periodValue="daily" period={period} setPeriod={setPeriod}>
                         Daily
                     </PeriodButton>
@@ -85,7 +85,7 @@ export const Chart = ({ chartType, chartValues, period, setPeriod }: ChartProps)
                 </div>
                 <button
                     onClick={exportData}
-                    className="mr-12 mt-4 px-4 py-2 border-2 rounded-3xl border-primaryBlue-100 hover:bg-primaryBlue-100 dark:border-primaryBlue-600 dark:hover:bg-primaryBlue-600 transition-colors duration-200"
+                    className="sm:mr-12 mb-2 px-4 py-2 border-2 rounded-3xl border-primaryBlue-100 hover:bg-primaryBlue-100 dark:border-primaryBlue-600 dark:hover:bg-primaryBlue-600 transition-colors duration-200"
                 >
                     Export
                 </button>
