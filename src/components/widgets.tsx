@@ -58,7 +58,7 @@ export const Widgets = ({
             <Widget
                 text="Moisture"
                 value={lastWeather?.humidity ? `${lastWeather.humidity.toString()}%` : ""}
-                chartTypeValue="moisture"
+                chartTypeValue="humidity"
                 currentChartType={chartType}
                 setChartType={setChartType}
             />

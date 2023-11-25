@@ -25,6 +25,12 @@ export const EditStationModal = ({ darkMode, stationId }: EditStationModal) => {
             });
     };
 
+    const handleDelete = () => {
+        axios.delete(`http://10.74.5.224:8000/api/v1/station/${stationId}`).then((res) => {
+            window.location.reload();
+        });
+    };
+
     return (
         <Dialog>
             <DialogTrigger className="h-fit">
@@ -37,12 +43,20 @@ export const EditStationModal = ({ darkMode, stationId }: EditStationModal) => {
                         Name
                     </Label>
                     <Input value={name} onChange={(e) => setName(e.target.value)} id="name" />
-                    <button
-                        onClick={handleSubmit}
-                        className="w-fit mt-2 border-2 border-primaryBlue-300 hover:bg-primaryBlue-100 dark:hover:bg-primaryBlue-400 transition-colors duration-200 rounded-2xl p-2"
-                    >
-                        Change
-                    </button>
+                    <div className="flex justify-between">
+                        <button
+                            onClick={handleDelete}
+                            className="w-fit mt-4 border-2 border-primaryBlue-300 hover:bg-primaryBlue-100 dark:hover:bg-primaryBlue-400 transition-colors duration-200 rounded-2xl p-2"
+                        >
+                            Delete
+                        </button>
+                        <button
+                            onClick={handleSubmit}
+                            className="w-fit mt-4 border-2 border-primaryBlue-300 hover:bg-primaryBlue-100 dark:hover:bg-primaryBlue-400 transition-colors duration-200 rounded-2xl p-2"
+                        >
+                            Change
+                        </button>
+                    </div>
                 </DialogHeader>
             </DialogContent>
         </Dialog>

@@ -18,7 +18,7 @@ const getYxis = (weather: Weather[] | null, chartType: ChartType) => {
     switch (chartType) {
         case "temperature":
             return weather?.map((value: Weather) => value?.temperature);
-        case "moisture":
+        case "humidity":
             return weather?.map((value: Weather) => value?.humidity);
         case "pressure":
             return weather?.map((value: Weather) => value?.pressure);

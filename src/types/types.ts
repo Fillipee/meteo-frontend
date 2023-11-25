@@ -8,7 +8,7 @@ export type Weather = {
     stationId: number;
 } | null;
 
-export type ChartType = "temperature" | "moisture" | "pressure";
+export type ChartType = "temperature" | "humidity" | "pressure";
 
 export type ChartValues = {
     min: Array<number>;

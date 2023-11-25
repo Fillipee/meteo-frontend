@@ -38,6 +38,19 @@ function App() {
     });
 
     useEffect(() => {
+        axios.get(`http://10.74.5.224:8000/api/v1/daily/${chartType}`).then((res) => {
+            setChartValues(res.data);
+        });
+    }, [chartType]);
+
+    useEffect(() => {
+        axios.get(`http://10.74.5.224:8000/api/v1/stations`).then((res) => {
+            setStations(res.data);
+            setStation(res.data[0].id);
+        });
+    }, []);
+
+    useEffect(() => {
         function onConnect() {
             setIsConnected(true);
         }
@@ -47,6 +60,8 @@ function App() {
         }
 
         function onWeatherEvent(value: Weather[]) {
+            // console.log(value.filter((val) => val?.id === parseInt(station)));
+
             setWeather(value);
         }
 
@@ -59,19 +74,6 @@ function App() {
             socket.off("disconnect", onDisconnect);
             socket.off("weather", onWeatherEvent);
         };
-    }, []);
-
-    useEffect(() => {
-        axios.get(`http://10.74.5.224:8000/api/v1/daily/temperature`).then((res) => {
-            setChartValues(res.data);
-        });
-    }, []);
-
-    useEffect(() => {
-        axios.get(`http://10.74.5.224:8000/api/v1/stations`).then((res) => {
-            setStations(res.data);
-            setStation(res.data[0].id);
-        });
     }, []);
 
     return (
