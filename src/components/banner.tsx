@@ -36,7 +36,7 @@ export const Banner = ({
         const isDayTime = isBefore(new Date(year, month, day, hour), new Date(year, month, day, 16));
 
         if (isDayTime) {
-            if (hour > 0 && hour < 7) {
+            if (hour > 3 && hour < 7) {
                 return "bg-sunrise";
             }
 

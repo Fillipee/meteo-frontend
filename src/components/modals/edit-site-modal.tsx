@@ -79,9 +79,9 @@ export const EditSiteModal = ({
                             }}
                         >
                             <div className="flex items-center gap-x-3">
-                                <RadioGroupItem value="kpa" id="kpa" />
-                                <Label htmlFor="kpa" className="text-md">
-                                    Kilopascals (kPa)
+                                <RadioGroupItem value="pa" id="pa" />
+                                <Label htmlFor="pa" className="text-md">
+                                    Pascals (Pa)
                                 </Label>
                             </div>
                             <div className="flex items-center gap-x-3">
@@ -91,21 +91,9 @@ export const EditSiteModal = ({
                                 </Label>
                             </div>
                             <div className="flex items-center gap-x-3">
-                                <RadioGroupItem value="mbar" id="mbar" />
-                                <Label htmlFor="mbar" className="text-md">
-                                    Millibars (mbar)
-                                </Label>
-                            </div>
-                            <div className="flex items-center gap-x-3">
-                                <RadioGroupItem value="inhg" id="inhg" />
-                                <Label htmlFor="inhg" className="text-md">
-                                    Inches of mercury (inHg)
-                                </Label>
-                            </div>
-                            <div className="flex items-center gap-x-3">
-                                <RadioGroupItem value="mmhg" id="mmhg" />
-                                <Label htmlFor="mmhg" className="text-md">
-                                    Millimeters of mercury (mm Hg)
+                                <RadioGroupItem value="kpa" id="kpa" />
+                                <Label htmlFor="kpa" className="text-md">
+                                    Kilopascals (kPa)
                                 </Label>
                             </div>
                         </RadioGroup>

@@ -10,6 +10,10 @@ type WidgetProps = {
 };
 
 export const Widget = ({ text, value, chartTypeValue, currentChartType, setChartType }: WidgetProps) => {
+    if (!value) {
+        return <></>;
+    }
+    
     return (
         <button
             onClick={() => setChartType(chartTypeValue)}

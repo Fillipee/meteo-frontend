@@ -60,7 +60,12 @@ function App() {
                     pressureUnit={pressureUnit}
                     setPressureUnit={setPressureUnit}
                 />
-                <Widgets weather={weather} chartType={chartType} setChartType={setChartType} />
+                <Widgets
+                    weather={weather}
+                    chartType={chartType}
+                    setChartType={setChartType}
+                    pressureUnit={pressureUnit}
+                />
                 <Chart weather={weather} chartType={chartType} period={period} setPeriod={setPeriod} />
             </Layout>
         </div>
