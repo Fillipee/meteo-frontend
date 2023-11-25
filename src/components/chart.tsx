@@ -1,24 +1,17 @@
-import { ChartType, Weather } from "@/types/types";
+import { ChartType, ChartValues, Weather } from "@/types/types";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { PeriodButton } from "./ui/period-button";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 type ChartProps = {
-    weather: Weather[] | null;
     chartType: ChartType;
-    period: string;
-    setPeriod: React.Dispatch<React.SetStateAction<string>>;
+    chartValues: ChartValues;
 };
 
 const getXAxis = (weather: Weather[] | null, chartType: ChartType) => {
-    switch (chartType) {
-        case "temperature":
-            return weather?.map((value: Weather) =>
-                format(value?.time ? new Date(value?.time) : new Date(), "PPpp")
-            );
-        default:
-            return [];
-    }
+    return weather?.map((value: Weather) => format(value?.time ? new Date(value?.time) : new Date(), "PPpp"));
 };
 
 const getYxis = (weather: Weather[] | null, chartType: ChartType) => {
@@ -34,15 +27,20 @@ const getYxis = (weather: Weather[] | null, chartType: ChartType) => {
     }
 };
 
-export const Chart = ({ weather, chartType, period, setPeriod }: ChartProps) => {
+export const Chart = ({ chartType, chartValues }: ChartProps) => {
+    const [period, setPeriod] = useState<string>("weekly");
+
     const option = {
         tooltip: {
             trigger: "axis",
         },
+        legend: {
+            data: ["Min", "Max", "Mean"],
+        },
         xAxis: {
             type: "category",
             boundaryGap: false,
-            data: getXAxis(weather, chartType),
+            data: chartValues.time.map((time) => format(new Date(time), "PPpp")),
         },
         yAxis: {
             type: "value",
@@ -52,10 +50,28 @@ export const Chart = ({ weather, chartType, period, setPeriod }: ChartProps) => 
         },
         series: [
             {
-                name: "Temperature",
+                name: "Min",
                 type: "line",
                 stack: "Total",
-                data: getYxis(weather, chartType),
+                data: chartValues.min,
+                areaStyle: {
+                    color: localStorage.getItem("darkMode") === "true" ? "#0F37FF44" : "#fff",
+                },
+            },
+            {
+                name: "Max",
+                type: "line",
+                stack: "Total",
+                data: chartValues.max,
+                areaStyle: {
+                    color: localStorage.getItem("darkMode") === "true" ? "#0F37FF44" : "#fff",
+                },
+            },
+            {
+                name: "Mean",
+                type: "line",
+                stack: "Total",
+                data: chartValues.mean,
                 areaStyle: {
                     color: localStorage.getItem("darkMode") === "true" ? "#0F37FF44" : "#fff",
                 },

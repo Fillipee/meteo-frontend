@@ -10,9 +10,10 @@ type NavbarProps = {
     station: string;
     setStation: React.Dispatch<React.SetStateAction<string>>;
     darkMode: boolean;
+    stations: { name: string | null; id: number }[];
 };
 
-export const Navbar = ({ station, setStation, darkMode }: NavbarProps) => {
+export const Navbar = ({ station, setStation, darkMode, stations }: NavbarProps) => {
     return (
         <header className="flex gap-x-2 justify-between items-center">
             <div className="flex sm:gap-x-6 items-center">
@@ -26,16 +27,19 @@ export const Navbar = ({ station, setStation, darkMode }: NavbarProps) => {
                     </>
                 )}
 
-                <Select value={station} onValueChange={setStation}>
+                <Select value={station.toString()} onValueChange={setStation}>
                     <SelectTrigger className="w-[110px] sm:w-[160px]">
                         <SelectValue placeholder="Choose station" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="1">Stanice 1</SelectItem>
-                        <SelectItem value="2">Stanice 2</SelectItem>
+                        {stations.map((station) => (
+                            <SelectItem value={station?.id.toString()} key={station.id}>
+                                {station.name ? station.name : `Stanice ${station?.id}`}
+                            </SelectItem>
+                        ))}
                     </SelectContent>
                 </Select>
-                <EditStationModal darkMode={darkMode}/>
+                <EditStationModal darkMode={darkMode} />
             </div>
             <TooltipProvider>
                 <Tooltip delayDuration={100}>

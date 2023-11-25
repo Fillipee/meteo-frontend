@@ -3,12 +3,14 @@ import Layout from "./layout/layout";
 import { Banner } from "./components/banner";
 import { Widgets } from "./components/widgets";
 import { Chart } from "./components/chart";
-import { ChartType, Weather } from "./types/types";
+import { ChartType, ChartValues, Weather } from "./types/types";
 import { socket } from "./socket";
+import axios from "axios";
 
 function App() {
-    const [station, setStation] = useState<string>("1");
-    const [period, setPeriod] = useState<string>("weekly");
+    const [station, setStation] = useState<string>("");
+    const [stations, setStations] = useState<{ name: string | null; id: number }[]>([]);
+
     const [weather, setWeather] = useState<Weather[]>([]);
     const [chartType, setChartType] = useState<ChartType>("temperature");
     const [isConnected, setIsConnected] = useState(socket.connected);
@@ -24,19 +26,27 @@ function App() {
         : "kpa";
     const [pressureUnit, setPressureUnit] = useState<string>(localPressureUnit ? localPressureUnit : "kpa");
 
+    const [chartValues, setChartValues] = useState<ChartValues>({
+        // min: [10, 30, 40, 50],
+        // max: [50, 60, 70, 90],
+        // mean: [30, 40, 60, 70],
+        // time: [new Date(), new Date(), new Date(), new Date()],
+        min: [],
+        max: [],
+        mean: [],
+        time: [],
+    });
+
     useEffect(() => {
         function onConnect() {
-            console.log("Connected");
             setIsConnected(true);
         }
 
         function onDisconnect() {
-            console.log("Disconnected");
             setIsConnected(false);
         }
 
         function onWeatherEvent(value: Weather[]) {
-            console.log(value);
             setWeather(value);
         }
 
@@ -51,9 +61,22 @@ function App() {
         };
     }, []);
 
+    useEffect(() => {
+        axios.get(`http://10.74.5.224:8000/api/v1/daily/temperatures`).then((res) => {
+            console.log(res.data);
+        });
+    }, []);
+
+    useEffect(() => {
+        axios.get(`http://10.74.5.224:8000/api/v1/stations`).then((res) => {
+            setStations(res.data);
+            setStation(res.data[0].id);
+        });
+    }, []);
+
     return (
         <div className="bg-primaryBlue-50 dark:bg-primaryBlue-900 min-h-screen h-full p-4">
-            <Layout station={station} setStation={setStation} darkMode={darkMode}>
+            <Layout station={station} setStation={setStation} darkMode={darkMode} stations={stations}>
                 <Banner
                     weather={weather}
                     temperatureUnit={temperatureUnit}
@@ -70,7 +93,7 @@ function App() {
                     pressureUnit={pressureUnit}
                     temperatureUnit={temperatureUnit}
                 />
-                <Chart weather={weather} chartType={chartType} period={period} setPeriod={setPeriod} />
+                <Chart chartType={chartType} chartValues={chartValues} />
             </Layout>
         </div>
     );
