@@ -10,4 +10,9 @@ export type Weather = {
 
 export type ChartType = "temperature" | "moisture" | "pressure";
 
-export type ChartValues = { min: Array<number>; max: Array<number>; mean: Array<number>; time: Array<Date> };
+export type ChartValues = {
+    min: Array<number>;
+    max: Array<number>;
+    mean: Array<number>;
+    time: Array<string>;
+};

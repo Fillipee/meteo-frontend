@@ -40,7 +40,7 @@ export const Chart = ({ chartType, chartValues }: ChartProps) => {
         xAxis: {
             type: "category",
             boundaryGap: false,
-            data: chartValues.time.map((time) => format(new Date(time), "PPpp")),
+            // data: chartValues.time.map((time) => format(new Date(time), "PPpp")),
         },
         yAxis: {
             type: "value",

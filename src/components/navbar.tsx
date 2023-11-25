@@ -39,7 +39,7 @@ export const Navbar = ({ station, setStation, darkMode, stations }: NavbarProps)
                         ))}
                     </SelectContent>
                 </Select>
-                <EditStationModal darkMode={darkMode} />
+                <EditStationModal darkMode={darkMode} stationId={parseInt(station)} />
             </div>
             <TooltipProvider>
                 <Tooltip delayDuration={100}>

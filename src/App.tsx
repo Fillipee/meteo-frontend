@@ -62,8 +62,8 @@ function App() {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://10.74.5.224:8000/api/v1/daily/temperatures`).then((res) => {
-            console.log(res.data);
+        axios.get(`http://10.74.5.224:8000/api/v1/daily/temperature`).then((res) => {
+            setChartValues(res.data);
         });
     }, []);
 
