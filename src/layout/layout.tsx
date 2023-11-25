@@ -1,3 +1,4 @@
+import { Station } from "@/types/types";
 import { Navbar } from "../components/navbar";
 
 type LayoutProps = {
@@ -5,7 +6,7 @@ type LayoutProps = {
     station: string;
     setStation: React.Dispatch<React.SetStateAction<string>>;
     darkMode: boolean;
-    stations: { name: string | null; id: number }[];
+    stations: Station[];
 };
 
 const Layout = ({ children, station, setStation, darkMode, stations }: LayoutProps) => {

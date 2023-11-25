@@ -1,11 +1,14 @@
 export type Weather = {
-    id: number;
-    time: Date;
-    temperature?: number;
-    humidity?: number;
-    pressure?: number;
-    quality?: number;
     stationId: number;
+    data: {
+        id: number;
+        time: Date;
+        temperature?: number;
+        humidity?: number;
+        pressure?: number;
+        quality?: number;
+        stationId: number;
+    }[];
 } | null;
 
 export type ChartType = "temperature" | "humidity" | "pressure";
@@ -16,3 +19,20 @@ export type ChartValues = {
     mean: Array<number>;
     time: Array<string>;
 };
+
+export type Station = {
+    id: number;
+    mac: string;
+    name: string;
+    uri: string;
+};
+
+export type Data = {
+    id: number;
+    time: Date;
+    temperature?: number;
+    humidity?: number;
+    pressure?: number;
+    quality?: number;
+    stationId: number;
+} | null;

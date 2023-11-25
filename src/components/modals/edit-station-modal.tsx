@@ -4,23 +4,28 @@ import { useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import axios from "axios";
+import { Station } from "@/types/types";
 
 type EditStationModal = {
     darkMode: boolean;
     stationId: number;
+    stations: Station[];
 };
 
-export const EditStationModal = ({ darkMode, stationId }: EditStationModal) => {
+export const EditStationModal = ({ darkMode, stationId, stations }: EditStationModal) => {
     const [name, setName] = useState<string>("");
+    const [ip, setIp] = useState<string>("");
 
     const handleSubmit = () => {
         axios
             .put(`http://10.74.5.224:8000/api/v1/station`, {
                 id: stationId,
                 name,
+                uri: ip,
             })
             .then((res) => {
                 setName("");
+                setIp("");
                 window.location.reload();
             });
     };
@@ -43,6 +48,10 @@ export const EditStationModal = ({ darkMode, stationId }: EditStationModal) => {
                         Name
                     </Label>
                     <Input value={name} onChange={(e) => setName(e.target.value)} id="name" />
+                    <Label htmlFor="ip" className="text-left">
+                        Ip
+                    </Label>
+                    <Input value={ip} onChange={(e) => setIp(e.target.value)} id="ip" />
                     <div className="flex justify-between">
                         <button
                             onClick={handleDelete}

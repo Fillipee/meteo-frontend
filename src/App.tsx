@@ -3,22 +3,25 @@ import Layout from "./layout/layout";
 import { Banner } from "./components/banner";
 import { Widgets } from "./components/widgets";
 import { Chart } from "./components/chart";
-import { ChartType, ChartValues, Weather } from "./types/types";
+import { ChartType, ChartValues, Station, Weather } from "./types/types";
 import { socket } from "./socket";
 import axios from "axios";
+import { Helmet } from "react-helmet"
 
 function App() {
     const [station, setStation] = useState<string>("");
-    const [stations, setStations] = useState<{ name: string | null; id: number }[]>([]);
+    const [stations, setStations] = useState<Station[]>([]);
 
-    const [weather, setWeather] = useState<Weather[]>([]);
+    const [weather, setWeather] = useState<Weather>(null);
     const [chartType, setChartType] = useState<ChartType>("temperature");
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [darkMode, setDarkMode] = useState<boolean>(false);
 
+    const [period, setPeriod] = useState<string>("weekly");
+
     const localTemperatureUnit = localStorage.getItem("temperatureUnit")
         ? localStorage.getItem("temperatureUnit")
-        : "kpa";
+        : "c";
     const [temperatureUnit, setTemperatureUnit] = useState(localTemperatureUnit ? localTemperatureUnit : "c");
 
     const localPressureUnit = localStorage.getItem("pressureUnit")
@@ -38,10 +41,12 @@ function App() {
     });
 
     useEffect(() => {
-        axios.get(`http://10.74.5.224:8000/api/v1/daily/${chartType}`).then((res) => {
-            setChartValues(res.data);
-        });
-    }, [chartType]);
+        if (station && chartType) {
+            axios.get(`http://10.74.5.224:8000/api/v1/${period}/${station}/${chartType}`).then((res) => {
+                setChartValues(res.data);
+            });
+        }
+    }, [period, chartType, station]);
 
     useEffect(() => {
         axios.get(`http://10.74.5.224:8000/api/v1/stations`).then((res) => {
@@ -59,9 +64,7 @@ function App() {
             setIsConnected(false);
         }
 
-        function onWeatherEvent(value: Weather[]) {
-            // console.log(value.filter((val) => val?.id === parseInt(station)));
-
+        function onWeatherEvent(value: Weather) {
             setWeather(value);
         }
 
@@ -78,7 +81,10 @@ function App() {
 
     return (
         <div className="bg-primaryBlue-50 dark:bg-primaryBlue-900 min-h-screen h-full p-4">
-            <Layout station={station} setStation={setStation} darkMode={darkMode} stations={stations}>
+            <Helmet>
+                <title>UPtime</title>
+            </Helmet>
+            <Layout station={station} setStation={setStation} stations={stations} darkMode={darkMode}>
                 <Banner
                     weather={weather}
                     temperatureUnit={temperatureUnit}
@@ -95,7 +101,12 @@ function App() {
                     pressureUnit={pressureUnit}
                     temperatureUnit={temperatureUnit}
                 />
-                <Chart chartType={chartType} chartValues={chartValues} />
+                <Chart
+                    chartType={chartType}
+                    chartValues={chartValues}
+                    period={period}
+                    setPeriod={setPeriod}
+                />
             </Layout>
         </div>
     );

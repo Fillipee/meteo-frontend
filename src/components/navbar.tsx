@@ -5,12 +5,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { cs } from "date-fns/locale";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import { EditStationModal } from "./modals/edit-station-modal";
+import { AddStationModal } from "./modals/add-station-modal";
+import { Station } from "@/types/types";
 
 type NavbarProps = {
     station: string;
     setStation: React.Dispatch<React.SetStateAction<string>>;
     darkMode: boolean;
-    stations: { name: string | null; id: number }[];
+    stations: Station[];
 };
 
 export const Navbar = ({ station, setStation, darkMode, stations }: NavbarProps) => {
@@ -39,7 +41,8 @@ export const Navbar = ({ station, setStation, darkMode, stations }: NavbarProps)
                         ))}
                     </SelectContent>
                 </Select>
-                <EditStationModal darkMode={darkMode} stationId={parseInt(station)} />
+                <EditStationModal darkMode={darkMode} stations={stations} stationId={parseInt(station)} />
+                <AddStationModal darkMode={darkMode} />
             </div>
             <TooltipProvider>
                 <Tooltip delayDuration={100}>

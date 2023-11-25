@@ -1,17 +1,17 @@
 import { SetStateAction } from "react";
 import { Widget } from "./widget";
-import { ChartType, Weather } from "@/types/types";
+import { ChartType, Data, Weather } from "@/types/types";
 import { getTemperature } from "../lib/utils";
 
 type WidgetsProps = {
-    weather: Weather[] | null;
+    weather: Weather | null;
     chartType: ChartType;
     setChartType: React.Dispatch<SetStateAction<ChartType>>;
     pressureUnit: string;
     temperatureUnit: string;
 };
 
-const getPressureValue = (weather: Weather, pressureUnit: string) => {
+const getPressureValue = (weather: Data, pressureUnit: string) => {
     const value = weather?.pressure ? weather.pressure : null;
 
     if (!value) {
@@ -37,11 +37,11 @@ export const Widgets = ({
     pressureUnit,
     temperatureUnit,
 }: WidgetsProps) => {
-    const lastWeather: Weather | null = weather ? weather[weather?.length - 1] : null;
+    const lastWeather: Data = weather ? weather.data[weather.data?.length - 1] : null;
 
     const pressureValue = getPressureValue(lastWeather, pressureUnit);
 
-    const temperature = weather ? weather[0]?.temperature : null;
+    const temperature = weather ? weather.data[0].temperature : null;
     const formattedTemperature = getTemperature(temperature, temperatureUnit);
 
     return (
@@ -57,7 +57,7 @@ export const Widgets = ({
             />
             <Widget
                 text="Moisture"
-                value={lastWeather?.humidity ? `${lastWeather.humidity.toString()}%` : ""}
+                value={lastWeather?.humidity ? `${lastWeather?.humidity.toString()}%` : ""}
                 chartTypeValue="humidity"
                 currentChartType={chartType}
                 setChartType={setChartType}

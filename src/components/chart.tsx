@@ -1,35 +1,16 @@
-import { ChartType, ChartValues, Weather } from "@/types/types";
+import { ChartType, ChartValues } from "@/types/types";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { PeriodButton } from "./ui/period-button";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 type ChartProps = {
     chartType: ChartType;
     chartValues: ChartValues;
+    period: string;
+    setPeriod: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const getXAxis = (weather: Weather[] | null, chartType: ChartType) => {
-    return weather?.map((value: Weather) => format(value?.time ? new Date(value?.time) : new Date(), "PPpp"));
-};
-
-const getYxis = (weather: Weather[] | null, chartType: ChartType) => {
-    switch (chartType) {
-        case "temperature":
-            return weather?.map((value: Weather) => value?.temperature);
-        case "humidity":
-            return weather?.map((value: Weather) => value?.humidity);
-        case "pressure":
-            return weather?.map((value: Weather) => value?.pressure);
-        default:
-            return [];
-    }
-};
-
-export const Chart = ({ chartType, chartValues }: ChartProps) => {
-    const [period, setPeriod] = useState<string>("weekly");
-
+export const Chart = ({ chartType, chartValues, period, setPeriod }: ChartProps) => {
     const option = {
         tooltip: {
             trigger: "axis",

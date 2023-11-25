@@ -5,7 +5,7 @@ import { SetStateAction } from "react";
 import { getTemperature } from "../lib/utils";
 
 type BannerProps = {
-    weather: Weather[] | null;
+    weather: Weather | null;
     temperatureUnit: string;
     setTemperatureUnit: React.Dispatch<SetStateAction<string>>;
     darkMode: boolean;
@@ -60,7 +60,7 @@ export const Banner = ({
         return "bg-night";
     };
 
-    const temperature = weather ? weather[0]?.temperature : null;
+    const temperature = weather ? weather?.data[0].temperature : null;
     const formattedTemperature = getTemperature(temperature, temperatureUnit);
 
     return (
