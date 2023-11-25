@@ -60,18 +60,35 @@ export const Chart = ({ chartType, chartValues, period, setPeriod }: ChartProps)
         ],
     };
 
+    const exportData = () => {
+        const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(JSON.stringify(chartValues))}`;
+        const link = document.createElement("a");
+        link.href = jsonString;
+        link.download = "data.json";
+
+        link.click();
+    };
+
     return (
         <section className="w-full bg-white dark:bg-primaryBlue-800 rounded-3xl shadow-lg">
-            <div className="flex gap-x-4 px-20 pt-8 pb-2">
-                <PeriodButton periodValue="daily" period={period} setPeriod={setPeriod}>
-                    Daily
-                </PeriodButton>
-                <PeriodButton periodValue="weekly" period={period} setPeriod={setPeriod}>
-                    Weekly
-                </PeriodButton>
-                <PeriodButton periodValue="monthly" period={period} setPeriod={setPeriod}>
-                    Monthly
-                </PeriodButton>
+            <div className="flex items-center justify-between">
+                <div className="flex gap-x-4 px-20 pt-8 pb-2">
+                    <PeriodButton periodValue="daily" period={period} setPeriod={setPeriod}>
+                        Daily
+                    </PeriodButton>
+                    <PeriodButton periodValue="weekly" period={period} setPeriod={setPeriod}>
+                        Weekly
+                    </PeriodButton>
+                    <PeriodButton periodValue="monthly" period={period} setPeriod={setPeriod}>
+                        Monthly
+                    </PeriodButton>
+                </div>
+                <button
+                    onClick={exportData}
+                    className="mr-12 mt-4 px-4 py-2 border-2 rounded-3xl border-primaryBlue-100 hover:bg-primaryBlue-100 dark:border-primaryBlue-600 dark:hover:bg-primaryBlue-600 transition-colors duration-200"
+                >
+                    Export
+                </button>
             </div>
             <ReactEcharts option={option} />
         </section>
